@@ -69,11 +69,11 @@ export function CourseTable() {
 
               {/* 4. ภาคการศึกษา */}
               <TableCell className="whitespace-nowrap py-3 text-sm font-normal">
-                {course.semester === "3" || course.semester === "summer"
-                  ? "ภาคฤดูร้อน"
-                  : course.semester
-                  ? `ภาคการศึกษาที่ ${course.semester}`
-                  : "—"}
+              {(course.semester as string) === "3" || (course.semester as string) === "summer"
+                ? "ภาคฤดูร้อน"
+                : course.semester
+                ? `ภาคการศึกษาที่ ${course.semester}`
+                : "—"}
               </TableCell>
 
               {/* 5. รายละเอียด */}

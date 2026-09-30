@@ -1,7 +1,13 @@
 import { useMemo, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus, PlusCircle, RotateCcw, X } from "lucide-react";
-import { Controller, useFieldArray, useForm, type DefaultValues } from "react-hook-form";
+import {
+  Controller,
+  useFieldArray,
+  useForm,
+  useWatch,
+  type DefaultValues,
+} from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -37,6 +43,7 @@ import {
   createCourseFormSchema,
   type CourseFormValues,
 } from "@/lib/schemas/course-schema";
+import type { Course } from "@/lib/types";
 
 const emptyCourseForm: DefaultValues<CourseFormValues> = {
   courseId: "",
@@ -66,32 +73,37 @@ export function AddNewCourseDialog() {
     name: "instructors",
   });
 
+  // ใช้ useWatch แทน form.watch เพื่อป้องกันปัญหากับ React Compiler
+  const watchedDescription = useWatch({
+    control: form.control,
+    name: "description",
+  });
+
+  const descriptionValue = watchedDescription || "";
+  const isDescriptionExceeded = descriptionValue.length > 100;
+
   const resetForm = () => {
     form.reset(emptyCourseForm);
   };
 
   function onSubmit(values: CourseFormValues) {
-    // ดึงเฉพาะคำว่า CPE หรือ ISNE ออกมาจากค่าที่เลือกใน Select
     const program = values.curriculum.startsWith("CPE") ? "CPE" : "ISNE";
 
-    // แปลงโครงสร้าง object ให้ตรงกับประเภทข้อมูล Course ใน Store
-    const formattedCourse = {
+    // กำหนด Type ให้ชัดเจนเป็น Course เพื่อระบุ Type แทนการใช้ as any
+    const formattedCourse: Course = {
       courseId: values.courseId,
       courseTitle: values.courseTitle,
       program: program,
-      semester: values.semester,
+      semester: values.semester as Course["semester"],
       description: values.description,
       instructors: values.instructors,
-      notifyByEmail: Boolean(values.emailNotification), // Mapping จาก emailNotification -> notifyByEmail
+      notifyByEmail: Boolean(values.emailNotification),
     };
 
-    addCourse(formattedCourse as any);
+    addCourse(formattedCourse);
     resetForm();
     setOpen(false);
   }
-
-  const descriptionValue = form.watch("description") || "";
-  const isDescriptionExceeded = descriptionValue.length > 100;
 
   return (
     <Dialog
