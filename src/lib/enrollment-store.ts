@@ -2,9 +2,9 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 import {
-  students as initialStudents,
   courses as initialCourses,
   enrollments as initialEnrollments,
+  students as initialStudents,
 } from "@/lib/mock-data";
 import type { Course, Enrollment, Student } from "@/lib/types";
 
@@ -16,7 +16,7 @@ type EnrollmentStore = {
   addStudent: (student: Student) => void;
   removeStudent: (studentId: string) => void;
   addCourse: (course: Course) => void;
-  removeInstructorFromCourse: (courseId: string, instructor: string) => void;
+  removeInstructorFromCourse: (courseId: string, instructorName: string) => void;
   removeCourse: (courseId: string) => void;
 };
 
@@ -41,14 +41,14 @@ export const useEnrollmentStore = create<EnrollmentStore>()(
       addCourse: (course) =>
         set((state) => ({ courses: [...state.courses, course] })),
 
-      removeInstructorFromCourse: (courseId, instructor) =>
+      removeInstructorFromCourse: (courseId, instructorName) =>
         set((state) => ({
           courses: state.courses.map((course) =>
             course.courseId === courseId
               ? {
                   ...course,
                   instructors: course.instructors.filter(
-                    (name) => name !== instructor,
+                    (inst) => inst.name !== instructorName,
                   ),
                 }
               : course,
@@ -61,6 +61,13 @@ export const useEnrollmentStore = create<EnrollmentStore>()(
           enrollments: state.enrollments.filter((e) => e.courseId !== courseId),
         })),
     }),
-    // เก็บเฉพาะ students/courses ลง localStorage — enrollments ไม่ persist
+    {
+      name: "lab17-2569-680610692", 
+      partialize: (state) => ({
+        students: state.students,
+        courses: state.courses,
+        enrollments: state.enrollments,
+      }),
+    },
   ),
 );
