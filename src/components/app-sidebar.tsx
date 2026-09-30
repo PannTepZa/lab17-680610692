@@ -1,4 +1,4 @@
-import { BookOpen, ClipboardList, Home } from "lucide-react";
+import {Home , Users , Library } from "lucide-react";
 import { Link, useLocation } from "react-router";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -23,8 +23,8 @@ const ROLE = "STUDENT";
 
 const items = [
   { title: "หน้าแรก", url: "/", icon: Home },
-  { title: "จัดการวิชาเรียน", url: "/admin/courses", icon: BookOpen },
-  { title: "จัดการการลงทะเบียน", url: "/admin/enrollments", icon: ClipboardList },
+  { title: "จัดการนักศึกษา", url: "/admin/students", icon: Users },
+  { title: "จัดการวิชาเรียน", url: "/admin/courses", icon: Library },
 ];
 
 export function AppSidebar() {
