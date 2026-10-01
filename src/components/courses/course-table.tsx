@@ -19,15 +19,15 @@ export function CourseTable() {
       <Table>
         <TableHeader>
           <TableRow className="hover:bg-transparent">
-            <TableHead className="w-[90px] py-2.5 pl-3 text-xs">รหัสวิชา</TableHead>
-            <TableHead className="w-[220px] py-2.5 text-xs">ชื่อวิชา</TableHead>
-            <TableHead className="w-[90px] py-2.5 text-center text-xs">หลักสูตร</TableHead>
-            <TableHead className="w-[130px] py-2.5 text-xs">ภาคการศึกษา</TableHead>
+            <TableHead className="w-[90px] py-2.5 pl-3 text-sm font-normal">รหัสวิชา</TableHead>
+            <TableHead className="w-[220px] py-2.5 text-sm font-normal">ชื่อวิชา</TableHead>
+            <TableHead className="w-[90px] py-2.5 text-center text-sm font-normal">หลักสูตร</TableHead>
+            <TableHead className="w-[130px] py-2.5 text-sm font-normal">ภาคการศึกษา</TableHead>
             {/* ขยายความกว้างช่องรายละเอียด */}
-            <TableHead className="w-[360px] py-2.5 text-xs">รายละเอียด</TableHead>
-            <TableHead className="w-[200px] py-2.5 text-xs">ผู้สอน</TableHead>
-            <TableHead className="w-[140px] py-2.5 text-center text-xs">รับข่าวสารทางอีเมล</TableHead>
-            <TableHead className="w-[70px] py-2.5 pr-3 text-center text-xs">Action</TableHead>
+            <TableHead className="w-[360px] py-2.5 text-sm font-normal">รายละเอียด</TableHead>
+            <TableHead className="w-[200px] py-2.5 text-sm font-normal">ผู้สอน</TableHead>
+            <TableHead className="w-[140px] py-2.5 text-center text-sm font-normal">รับข่าวสารทางอีเมล</TableHead>
+            <TableHead className="w-[70px] py-2.5 pr-3 text-center text-sm font-normal">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

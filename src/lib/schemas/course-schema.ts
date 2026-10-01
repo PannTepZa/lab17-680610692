@@ -22,7 +22,7 @@ export const courseFormSchema = z.object({
   description: z
     .string()
     .trim()
-    .max(100, "คำอธิบายยาวได้ไม่เกิน 100 ตัวอักษร")
+    .max(100, "รายละเอียดยาวได้ไม่เกิน 100 ตัวอักษร")
     .optional(),
   instructors: z
     .array(
@@ -33,7 +33,7 @@ export const courseFormSchema = z.object({
           .trim()
           .toLowerCase()
           .email("อีเมลไม่ถูกต้อง")
-          .endsWith("@cmu.ac.th", "อีเมลไม่ถูกต้อง"),
+          .endsWith("@cmu.ac.th", "ต้องเป็นอีเมล @cmu.ac.th"),
       })
     )
     .min(1, "ต้องมีผู้สอนอย่างน้อย 1 คน")

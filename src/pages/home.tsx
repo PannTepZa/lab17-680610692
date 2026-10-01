@@ -24,6 +24,7 @@ export default function HomePage() {
           </div>
         </CardContent>
       </Card>
+      <p className="text-center text-xs text-muted-foreground">จัดทำโดย ปัณณ์ กิตินา 680610692</p>
     </div>
   );
 }
